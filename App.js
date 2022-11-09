@@ -6,38 +6,84 @@ import axios from 'axios';
 
 
 
+const [times, setTimes] = useState([]);
+
+
+
+
+
 import { BarChart, Bar, XAxis, YAxis, 
 
 
     CartesianGrid } from 'recharts';
 
   useEffect(() => {
+    api.get('/times').then(response => setTimes(response.data))
 
   },[])
 const App = () => {
   
-    // Sample data
-    const data = [
-        { name: 'A', x: 12, y: 23, z: 122 },
-        { name: 'B', x: 22, y: 3, z: 73 },
-        { name: 'C', x: 13, y: 15, z: 32 },
-        { name: 'D', x: 44, y: 35, z: 23 },
-{ name: 'E', x: 35, y: 45, z: 20 },
-        { name: 'F', x: 62, y: 25, z: 29 },
-        { name: 'G', x: 37, y: 17, z: 61 },
-        { name: 'H', x: 28, y: 32, z: 45 },
-        { name: 'I', x: 19, y: 43, z: 93 },
-    ];
+  import React, { PureComponent } from 'react';
+  import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
   
-    return (
-        <BarChart width={500} height={500} data={data} >
-            <CartesianGrid />
+  const data = [
+    {
+      name: 'Brasil',
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: 'Alemanha',
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: 'Dinamarca',
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: 'Australia',
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      
+    
+  
+  export default class Example extends PureComponent {
+    static demoUrl = 'https://codesandbox.io/s/simple-line-chart-kec3v';
+  
+    render() {
+      return (
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />
-            <Bar dataKey="x" stackId="a" fill="#8884d8" />
-            <Bar dataKey="y" stackId="a" fill="#82ca9d" />
-        </BarChart>
-    );
-}
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+          </LineChart>
+        </ResponsiveContainer>
+      );
+    }
+  }
   
+     
 export default App;
